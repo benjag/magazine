@@ -12,6 +12,7 @@ function forceUpdate(event){
 }
 
 function forceUpdateWithValues(){
+
     jQuery.get(jQuery('main').attr('data-href'), {}, function(response){
         var data = {
             'action': 'gs_update_with_values',
@@ -20,7 +21,7 @@ function forceUpdateWithValues(){
 
         // since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
         jQuery.post(ajaxurl, data , function(response) {
-            console.log('getsocial.io updated');
+            console.log('getsocial.io updated w/values');
         });
     });
 }
@@ -38,9 +39,6 @@ jQuery('.getsocial-tab').on('click', function(e){
     if(!$this.hasClass('only-activate')){
         getsocial_window = window.open($this.attr('href'));
     }
-
-    // setInterval('checkForUpdate()', 10000);
-    setInterval('forceUpdateWithValues()', 5000);
 })
 
 function handleMessage(event){
@@ -56,24 +54,50 @@ function handleMessage(event){
 }
 
 jQuery(function($){
+
+    jQuery('#contact_us').on('click', function(e){
+        e.stopPropagation();
+    });
+
     jQuery('#api-key-form').submit(function(){
-        var data = jQuery(this).serialize();
+        var wp_data = jQuery(this).serialize();
         jQuery('.notification-bar').hide();
 
-        if(jQuery(this).find('#gs-api-key').val() != 0){
-            jQuery(this).find('input').prop('disabled', true);
-            jQuery(this).find('.loading-create').addClass('active');
-            jQuery(this).find('input[type="submit"]').hide();
 
-            jQuery.post( 'options.php', data).success( function(response){
-                jQuery('.loading-create').removeClass('active');
-                jQuery('.notification-bar.starting').show();
-
-                setTimeout('window.location.reload();', 3000);
-            });
-        } else {
+        if (validateEmail(jQuery(this).find('#gs-api-key').val())) {
             jQuery('.notification-bar').hide();
-            jQuery('.notification-bar.gs-error').show().find('p').html('API KEY cannot be blank.');
+            jQuery('.notification-bar.gs-error').show().find('p').html('API KEY is not an e-mail.');
+        } else {
+            if(jQuery(this).find('#gs-api-key').val() == 0) {
+                jQuery('.notification-bar').hide();
+                jQuery('.notification-bar.gs-error').show().find('p').html('API KEY cannot be blank.');
+            } else {
+                if(jQuery(this).find('#gs-api-key').val().length != 20) {
+                    jQuery('.notification-bar').hide();
+                    jQuery('.notification-bar.gs-error').show().find('p').html('API KEY must have 20 digits.');
+                } else {
+                    jQuery(this).find('input').prop('disabled', true);
+                    jQuery(this).find('.loading-create').addClass('active');
+                    jQuery(this).find('input[type="submit"]').hide();
+
+                    jQuery.post(document.getElementById('check-key-href').innerHTML, { api_key: jQuery(this).find('#gs-api-key').val() }, function(data){
+                        if (data.success) {
+                            jQuery.post( 'options.php', wp_data).success( function(response){
+                                jQuery('.loading-create').removeClass('active');
+                                jQuery('.notification-bar.starting').show();
+
+                                setTimeout('window.location.reload();', 3000);
+                            });
+                        } else {
+                            jQuery('.loading-create').removeClass('active');
+                            jQuery('#api-key-form').find('input[type="submit"]').show();
+                            jQuery('#api-key-form').find('input').prop('disabled', false);
+                            jQuery('.notification-bar').hide();
+                            jQuery('.notification-bar.gs-error').show().find('p').html('API KEY is invalid.');
+                        }
+                    });
+                }
+            }
         }
 
         return false;
@@ -127,6 +151,17 @@ jQuery(function($){
     });
 
     jQuery(document).on('click', '.only-activate', function(e){
+
+        if ($(this)[0].pathname == "/auth/mailchimp") {
+
+            if ($(this).attr('prevent')) {
+                alert("You need to install Subscriber Bar or Price Alert to work with MailChimp");
+            } else {
+                window.open($(this).attr('href'), '_blank')
+            }
+            return;
+        }
+
         e.preventDefault();
 
         $.post($(this).attr('href'), function(data){
@@ -346,8 +381,9 @@ jQuery(function($){
 
     var detectIE = document.addEventListener && !window.requestAnimationFrame;
 
-    function modal(trigger){
-        jQuery(trigger).on('click', function(){
+    function modal(trigger) {
+        jQuery(trigger).on('click', function(event){
+            event.stopPropagation()
             var modal_link = jQuery(this).attr('id'),
                 modal_id = jQuery('#' + modal_link + '-modal');
 
@@ -364,6 +400,12 @@ jQuery(function($){
     }
     modal('#settings');
 
+    modal('#install-ga-analytics');
+
+    modal('#install-copy-and-share');
+
+    modal('#install-mailchimp');
+
     jQuery('.modal-close').on('click', function(){
         jQuery('.modal-wrapper.active').stop().removeClass('active').addClass('rewind').delay(detectIE ? 0 : 700).queue(function(){
             jQuery(this).removeClass('rewind').addClass('hide');
@@ -377,5 +419,10 @@ jQuery(function($){
         });
     });
 
-    forceUpdateWithValues();
+    setInterval('forceUpdateWithValues()', 5000);
+
+    function validateEmail(email) {
+        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        return re.test(email);
+    }
 });

@@ -51,6 +51,12 @@ wp_enqueue_script( 'plugin' );
                             <i class="fa fa-cogs"></i> Settings
                         </a>
                     </li>
+
+                    <li class="submenu-link">
+                        <a href="<?php echo $GS->gs_account().'/sites/gs-wordpress/exclusions?api_key='.$GS->api_key.'&amp;source=wordpress' ?>" target="_blank">
+                            <i class="fa fa-chain-broken"></i> Exclude Pages
+                        </a>
+                    </li>
                 <?php endif; ?>
 
                 <li class="submenu-link">

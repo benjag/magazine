@@ -21,7 +21,7 @@ if ( defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	delete_site_option('gs-api-key');
     delete_site_option('gs-apps');
     delete_site_option('gs-lang');
-	delete_site_option('gs-place');
-    delete_site_option('gs-place-follow');
-    delete_site_option('gs-posts-page');
+	// delete_site_option('gs-place');
+    // delete_site_option('gs-place-follow');
+    // delete_site_option('gs-posts-page');
 }

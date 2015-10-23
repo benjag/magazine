@@ -3,10 +3,10 @@
 class GS {
 
     // Local
-    // private $gs_url = "//localhost:3001";
-    // private $gs_account = "http://localhost:3000/";
-    // private $gs_url_api = "http://localhost:3001";
-    // public $api_url = "http://localhost:3000/api/v1/";
+    // private $gs_url = "//127.0.0.1:3001";
+    // private $gs_account = "http://127.0.0.1:3000/";
+    // private $gs_url_api = "http://127.0.0.1:3001";
+    // public $api_url = "http://127.0.0.1:3000/api/v1/";
 
     // Staging
     // private $gs_url = "http://staging.api.at.getsocial.io";
@@ -124,11 +124,15 @@ EOF;
     }
 
 
-    function getCode($app_name, $post_url = null, $post_title = null, $post_image = null, $price = null, $currency = null){
+    function getCode($app_name, $post_url = null, $post_title = null, $post_image = null, $price = null, $currency = null, $add_custom_tags = false){
         
-        $gs_custom_tags = 'data-url="' . $post_url . '" ';
-        $gs_custom_tags .= 'data-title="' . $post_title . '" ';
-        $gs_custom_tags .= $post_image != null ? 'data-image="' . $post_image . '"' : '';
+        $gs_custom_tags = '';
+
+        if ($add_custom_tags) {
+            $gs_custom_tags .= 'data-url="' . $post_url . '" ';
+            $gs_custom_tags .= 'data-title="' . $post_title . '" ';
+            $gs_custom_tags .= $post_image != null ? 'data-image="' . $post_image . '"' : '';
+        }
 
         switch ($app_name) {
             case 'sharing_bar':

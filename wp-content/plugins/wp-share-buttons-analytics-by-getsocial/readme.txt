@@ -1,11 +1,11 @@
 === Social Sharing, Follow Bar & Share Buttons by GetSocial.io ===
 Contributors: GetSocial.io, joaoromao
 
-Tags: addthis, addtoany, analytics, button, facebook share, facebook button, like button, tweet button, twitter share, pinterest share, pin button, floating buttons, share, share button, share buttons, share links, shareaholic, sharethis, sharing, social, social analytics, social media, social bookmarking, social buttons, social media, social plugin, social share, social share buttons, social sharing, mobile share bar, mobile sharing, top bar, welcome bar, hello bar, follow buttons, instagram, youtube, increase followers, increase shares, increase traffic, copy paste shares, google analytics integration, yummy, flickr, rss
+Tags: addthis, addtoany, analytics, button, facebook share, facebook button, like button, tweet button, twitter share, pinterest share, pin button, floating buttons, share, share button, share buttons, share links, shareaholic, sharethis, sharing, social, social analytics, social media, social bookmarking, social buttons, social media, social plugin, social share, social share buttons, social sharing, mobile share bar, mobile sharing, top bar, welcome bar, hello bar, follow buttons, instagram, youtube, increase followers, increase shares, increase traffic, copy paste shares, google analytics integration, yummly, flickr, rss, mailchimp
 
 Requires at least: 3.0
 Tested up to: 4.3
-Stable tag: 2.8
+Stable tag: 2.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,11 +13,11 @@ All in one plugin with tools to grow your traffic, shares and followers. Include
 
 == Description ==
 
-**Social Sharing Buttons by GetSocial.io** is a freemium WordPress all in one toolkit to help you grow your shares, traffic and followers. Get more Visitors, Conversions, Subscribers, Shares and Revenue from your site. Increase your shares, followers & conversionswith GetSocial. **This is a freemium plugin so there are some free apps and some paid apps, depending on your needs**
+**Social Sharing Buttons by GetSocial.io** is a freemium WordPress all in one toolkit to help you grow your shares, traffic and followers. Get more Visitors, Conversions, Subscribers, Shares and Revenue from your site. Increase your shares, followers & conversions with GetSocial. **This is a freemium plugin so there are some free apps and some paid apps, depending on your needs** Now integrating with MailChimp. 
 
 —
 
-**Partnership with WP Slimstat**: As of June/2015 we started providing all Slimstat users free social sharing analytics. We provide a list of top shared posts and shares count in top social networks. 
+**Integration with MailChimpt**: As of October/2015 we started providing a native integration with MailChimp to our paid customers. Users of the Subscriber Bar & Price Alert features (both paid) are now able to push emails automatically, in real-time, to their MailChimp lists. 
 
 —
 
@@ -45,6 +45,7 @@ All in one plugin with tools to grow your traffic, shares and followers. Include
 - Conversion Tracking
 - Google Analytics Integration
 - Social Sharing Analytics
+- MailChimp Integration
 
 <h4>Visits Limit</h4>
 - Free: 10,000 per month;
@@ -155,7 +156,7 @@ GetSocial provides **FREE and quick support** for all its users, free or paid. W
 
 The free plan has a set of social media tools that can help you increase your traffic, shares and follows. You'll have access to our social sharing bars (horizontal, floating and native), custom facebook shares and also to our welcome bar.
 
-Included in the free package is also our basic 'Most Shared Pages' panel. This will give you a brief understanding which pages are getting more shares on your website and in which networks. Please notice that some of the abovementioned features have some customization options which are reserved to our paid users. These include: color, shape & twitter handle.
+Included in the free package is also our basic 'Most Shared Pages' panel. This will give you a brief understanding which pages are getting more shares on your website and in which networks. Please notice that some of the above mentioned features have some customization options which are reserved to our paid users. These include: color, shape & twitter handle.
 
 **Are there any short codes available?**
 
@@ -278,7 +279,7 @@ Absolutely not! There are no contracts. Pay monthly, cancel anytime. There are n
 GetSocial services or applications subscriptions, advertising or any other kind of service are non-refundable and GetSocial is not obligated to provide the User a refund at any time. We may, at our discretion, provide credits toward future services or applications subscription, advertising, or any other kind of service charges on a case-by-case basis.
 
 **Is there someone I can talk about GetSocial?**
-
+ 
 Sure, we’re always here to help. You can contact us at support@getsocial.io or use the help widget on the bottom-right corner of the plugin page.
 
 == Screenshots ==
@@ -294,6 +295,23 @@ Sure, we’re always here to help. You can contact us at support@getsocial.io or
 9. Analytics for your Social Bars
 
 == Changelog ==
+
+**2.9.2**
+
+- Fix API urls
+
+**2.9.1**
+
+- Added Google Analitycs App
+- API Key validation on library reinslations
+
+**2.9**
+
+- Added MailChimp Integration
+- Added new Google Logo
+- Added compatibility to page builder plugin
+- Added new app images
+- Added Exclude Page button to the top bar
 
 **2.8**
 

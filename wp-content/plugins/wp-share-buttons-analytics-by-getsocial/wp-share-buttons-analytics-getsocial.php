@@ -3,7 +3,7 @@
  * Plugin Name: Share Buttons & tools to grow traffic by GetSocial.io
  * Plugin URI: http://getsocial.io
  * Description: Share Buttons by GetSocial.io is a freemium WordPress plugin that enables you to track social shares on Wordpress. Provide beautiful wordpress sharing buttons, track how many shares were made in each post and see how much traffic, conversions and shares each post generated. Optimize your SEO and increase social shares with GetSocial.io.
- * Version: 2.8
+ * Version: 2.9.2
  * Author: Getsocial, S.A.
  * Author URI: http://getsocial.io
  * License: GPL2
@@ -92,14 +92,24 @@ if ( class_exists( 'WooCommerce' ) ) {
     add_action( 'woocommerce_single_product_summary', 'on_product_after_content', 55 );
 }
 
-add_filter('the_content', 'on_post_content', 0);
+// check if page builder plugin is installed and change the order of the GS div
+$installed_plugins = get_option('active_plugins');
+
+if (array_key_exists('siteorigin-panels/siteorigin-panels.php', $installed_plugins)) {
+    add_filter('the_content', 'on_post_content', 10);
+} else {
+    add_filter('the_content', 'on_post_content', 0);
+}
 
 add_filter('the_excerpt','change_excerpt');
 
+add_action('woocommerce_before_main_content', 'on_post_content', 10);
 
 // Add GS code to the post excerpts
 function change_excerpt($content) {
     
+    global $wp_query;
+    $post = $wp_query->post;
     $GS = get_gs();
 
     $groups_active = $GS->is_active('sharing_bar');
@@ -112,9 +122,9 @@ function change_excerpt($content) {
 
         if($groups_active):
 
-            $groups = $GS->getCode('sharing_bar', get_permalink(), get_the_title(), wp_get_attachment_url( get_post_thumbnail_id($post->ID)));
+            $groups = $GS->getCode('sharing_bar', get_permalink(), get_the_title(), wp_get_attachment_url( get_post_thumbnail_id($post->ID)), null, null, true);
 
-            $position = ($wooposition != null ? $wooposition : $GS->prop('sharing_bar', 'position'));
+            $position = $GS->prop('sharing_bar', 'position');
 
             if($position == 'top' || $position == 'bottom' || $position == 'both'):
                 $after_content = $after_content . $groups;
@@ -124,9 +134,9 @@ function change_excerpt($content) {
         
         if ($big_counter_bar_active):
             
-            $big_counter = $GS->getCode('social_bar_big_counter', get_permalink(), get_the_title(), wp_get_attachment_url( get_post_thumbnail_id($post->ID)));
+            $big_counter = $GS->getCode('social_bar_big_counter', get_permalink(), get_the_title(), wp_get_attachment_url( get_post_thumbnail_id($post->ID)), null, null, true);
 
-            $position = ($wooposition != null ? $wooposition : $GS->prop('social_bar_big_counter', 'position'));
+            $position = $GS->prop('sharing_bar', 'position');
 
             if( $position == 'top' || $position == 'bottom' || $position == 'both'):
                 $after_content = $after_content . $big_counter;
@@ -177,7 +187,14 @@ function add_buttons_to_content($content, $woocomerce, $wooposition = null){
     $condition = true;
 
     if($places == null || $places == 'place-all'):
-        $condition = (is_single() || is_page());
+        
+        if (function_exists('is_shop')) {
+            $shop_page = is_shop();
+        } else {
+            $shop_page = false;
+        }
+
+        $condition = (is_single() || is_page() || $shop_page);
     elseif ($places == 'place-posts'):
         $condition = is_single();
     elseif ($places == 'place-pages'):
@@ -240,6 +257,7 @@ function add_buttons_to_content($content, $woocomerce, $wooposition = null){
         if($price_alert_active && $wooposition && $condition):
 
             $product = new WC_Product( get_the_ID() );
+
             $price = $product->price;
 
             $price_alert_button = $GS->getCode('price_alert', get_permalink(), get_the_title(), wp_get_attachment_url( get_post_thumbnail_id($post->ID)), $price, get_woocommerce_currency_symbol());
@@ -310,7 +328,7 @@ function add_buttons_to_content($content, $woocomerce, $wooposition = null){
 
         if($groups_active):
 
-            $groups = $GS->getCode('sharing_bar', get_permalink(), get_the_title(), wp_get_attachment_url( get_post_thumbnail_id($post->ID)));
+            $groups = $GS->getCode('sharing_bar', get_permalink(), get_the_title(), wp_get_attachment_url( get_post_thumbnail_id($post->ID)), null, null, true);
 
             $position = ($wooposition != null ? $wooposition : $GS->prop('sharing_bar', 'position'));
 
@@ -320,7 +338,7 @@ function add_buttons_to_content($content, $woocomerce, $wooposition = null){
         endif;
         
         if ($big_counter_bar_active):
-            $big_counter = $GS->getCode('social_bar_big_counter', get_permalink(), get_the_title(), wp_get_attachment_url( get_post_thumbnail_id($post->ID)));
+            $big_counter = $GS->getCode('social_bar_big_counter', get_permalink(), get_the_title(), wp_get_attachment_url( get_post_thumbnail_id($post->ID)), null, null, true);
 
             $position = ($wooposition != null ? $wooposition : $GS->prop('social_bar_big_counter', 'position'));
 
@@ -341,9 +359,19 @@ function add_buttons_to_content($content, $woocomerce, $wooposition = null){
 add_shortcode( 'getsocial', 'gs_bars_shortcode' );
 
 function gs_bars_shortcode($atts) {
+
+    global $wp_query;
+    $post = $wp_query->post;
     $GS = get_gs();
+
+    if (function_exists('is_shop')) {
+        $shop_page = is_shop();
+    } else {
+        $shop_page = false;
+    }
+
     // if no type defined
-    if($atts['app'] == 'follow_bar' || (array_key_exists('app',$atts) && (is_single() || is_page()))){
+    if($atts['app'] == 'follow_bar' || (array_key_exists('app',$atts) && (is_single() || is_page() || $shop_page))){
         return $GS->getCode($atts['app'], get_permalink(), get_the_title(), wp_get_attachment_url( get_post_thumbnail_id($post->ID)));
     } else {
         return "";

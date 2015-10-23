@@ -38,15 +38,18 @@
                     <form id="api-key-form" method="post" class="api-key gs-form gs-small hidden" action="options.php">
                         <?php settings_fields( 'getsocial-gs-settings' ); ?>
                         <?php do_settings_sections( 'getsocial-gs-settings' ); ?>
-
                         <div class="form-content">
                             <div class="field-clean">
                                 <div class="field-input">
-                                    <p>Please go to your Getsocial Account and get your API KEY in the site options page.</p>
-                                    <input id="gs-api-key" type="text" name="gs-api-key" size="60" value="" />
+                                    <p>Please go to your <a href="http://getsocial.io/customers/sign-in" target="_blank">Getsocial Account</a> and get your API KEY in the site options page.</p>
+                                    <input id="gs-api-key" type="text" name="gs-api-key" size="60" value="" maxlength="20"/>
+                                    <p>Need help?
+                                        <a href="#" id="contact_us">Contact us</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
+                        <span id="check-key-href" style="display: none;"><?php echo $GS->gs_account() ?>/api/v1/sites/verify_key?url=<?php echo get_option('siteurl'); ?></span>
                         <div class="form-button-group">
                             <input type="submit" class="gs-button gs-success" value="Save Changes" />
                             <span class="loading-create gs-button gs-success trans border gs-big hide">
@@ -78,7 +81,7 @@
         
         </div>
     </main>
-
+    <!-- Settings Modal -->
     <div id="settings-modal" class="modal-wrapper hide">
         <div class="gs-modal">
             <div class="modal-title">
@@ -156,6 +159,85 @@
         </div>
         <div class="modal-cover modal-close"></div>
     </div>
+    <!-- Install Google Analytics Modal -->
+    <div id="install-ga-analytics-modal" class="modal-wrapper hide">
+        <div class="gs-modal small text-center">
+            <div class="text-block">
+                <div class="modal-title">
+                    <p class="title-obj">Google Analytics Integration</p>
+                </div>
+                <p class="text-center">
+                    Track all social interactions made on your website without any code. Social sharing analytics, directly on Google Analytics. 
+                </p>
+                <div class="clearfix text-center" style="margin-top: 30px">
+                    <div class="col-16">
+                        <p style="margin-bottom: 0"><strong>Our Blog's example</strong></p>
+                        <img src="<?php echo plugins_url( '/img/modals/ga_integration.png', __FILE__ ) ?>" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="form-button-group">
+                <a href="<?php echo $GS->gs_account() ?>/sites/gs-wordpress/billing/select_tier?api_key=<?php echo $GS->api_key ?>&amp;source=wordpress<?php echo $GS->utms('pro_header') ?>" target="_blank" class="gs-button gs-success plan-two">
+                    Upgrade to Starter
+                </a>
+                <a href="javascript:void(0)" class="gs-button gs-error trans modal-close">Cancel</a>
+            </div>
+
+        </div>
+        <div class="modal-cover modal-close"></div>
+    </div>
+    <!-- Install Copy and Share Modal -->
+    <div id="install-copy-and-share-modal" class="modal-wrapper hide">
+        <div class="gs-modal small text-center">
+            <div class="text-block">
+                <div class="modal-title">
+                    <p class="title-obj">Copy Paste Share Tracking</p>
+                </div>
+                <p class="text-center">
+                    Half of shares made on our blog are made via dark social channels, such as copy & paste, SMS and chat applications. What about yours?
+                </p>
+                <div class="clearfix text-center" style="margin-top: 30px">
+                    <div class="col-16">
+                        <p style="margin-bottom: 0"><strong>Out Blog's example</strong></p>
+                        <img src="<?php echo plugins_url( '/img/modals/ga_integration.png', __FILE__ ) ?>" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="form-button-group">
+                <a href="<?php echo $GS->gs_account() ?>/sites/gs-wordpress/billing/select_tier?api_key=<?php echo $GS->api_key ?>&amp;source=wordpress<?php echo $GS->utms('pro_header') ?>" target="_blank" class="gs-button gs-success plan-two">
+                    Upgrade to Starter
+                </a>
+                <a href="javascript:void(0)" class="gs-button gs-error trans modal-close">Cancel</a>
+            </div>
+        </div>
+        <div class="modal-cover modal-close"></div>
+    </div>
+    <!-- Install Mailchimp Modal -->
+    <div id="install-mailchimp-modal" class="modal-wrapper hide">
+        <div class="gs-modal small text-center">
+            <div class="text-block">
+                <div class="modal-title">
+                    <p class="title">MailChimp Integration</p>
+                </div>
+                <p class="text-center">
+                    Real-time integration with MailChimp. Connect our Subscriber Bar & Price Alert features to the world’s #1 e-mail marketing tool.
+                </p>
+                <div class="clearfix text-center" style="margin-top: 30px">
+                    <div class="col-16">
+                        <img src="<?php echo plugins_url( '/img/modals/mailchimp.png', __FILE__ ) ?>" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="form-button-group">
+                <a href="<?php echo $GS->gs_account() ?>/sites/gs-wordpress/billing/select_tier?api_key=<?php echo $GS->api_key ?>&amp;source=wordpress<?php echo $GS->utms('pro_header') ?>" target="_blank" class="gs-button gs-success plan-two">
+                    Upgrade to Starter
+                </a>
+                <a href="javascript:void(0)" class="gs-button gs-error trans modal-close">Cancel</a>
+            </div>
+
+        </div>
+    <div class="modal-cover modal-close"></div>
+</div>
 </div>
 
 <script>
@@ -177,6 +259,13 @@ UserVoice.push(['identify', {
 
 // Add default trigger to the bottom-right corner of the window:
 UserVoice.push(['addTrigger', '#help', { mode: 'contact' }]);
+
+if (document.getElementById('contact_us')) {
+    UserVoice.push(['addTrigger', '#contact_us', { mode: 'contact' }]);
+}
+
+
+//UserVoice.push(['addTrigger', '#help2', { mode: 'contact' }]);
 
 // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
 // UserVoice.push(['autoprompt', {}]);
