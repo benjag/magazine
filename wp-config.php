@@ -21,10 +21,10 @@ define( 'WPCACHEHOME', '/Applications/MAMP/htdocs/magazine/wp-content/plugins/wp
 define('DB_NAME', 'magazine');
 
 /** MySQL database username */
-define('DB_USER', 'root');
+define('DB_USER', 'magazine');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', 'f7h4j83ngjs93nvy482');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
