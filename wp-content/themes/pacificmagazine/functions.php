@@ -24,7 +24,7 @@ if ( ! function_exists( 'pacificmagazine_setup' ) ) :
 function pacificmagazine_setup() {
 
 	// This theme styles the visual editor to resemble the theme style.
-	$font_url = 'http://fonts.googleapis.com/css?family=Roboto+Slab:300,700,400|PT+Sans:400,700,400italic';
+	$font_url = 'http://fonts.googleapis.com/css?family=Roboto+Slab:300,700,400|Roboto:400,300,300italic';
 	add_editor_style( array( 'inc/editor-style.css', str_replace( ',', '%2C', $font_url ) ) );
                 
 

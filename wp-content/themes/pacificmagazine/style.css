@@ -276,7 +276,8 @@ select,
 textarea {
 	color: #404040;
 	color: hsl(0, 0%, 25%);
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
 	font-size: 62.5%;
 	line-height: 1.5;
 }
@@ -478,12 +479,14 @@ input[type="password"],
 input[type="search"],
 textarea {
 	padding: 8px;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     color: #333;
     border: 1px solid #ccc;
 }
 .wpcf7-response-output{
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
     color: #333;
     font-size:16px;
     font-size:1rem;
@@ -1067,7 +1070,8 @@ input[type="search"] {
 --------------------------------------------------------------*/
 .widget {
 	margin: 0 0 4em;
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
 	font-size: 16px;
 }
 .widget-title {
@@ -1188,11 +1192,13 @@ input[type="search"] {
     margin: 2rem 0 2rem;
     font-weight: 900;
     font-size: 40px;
-    font-size: 4rem;
+    font-size: 3.5rem;
     line-height: 1.3em;
     color: #000;
     color: hsl(0, 0%, 0%);
 }
+.entry-title a {color:#000;}
+
 .entry-content a { 
     text-decoration: none; 
 }
@@ -1317,7 +1323,8 @@ input[type="search"] {
 .entry-meta {
     margin-bottom: 2rem;
     padding: 0;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     font-size: 14px;
     font-size: 1.4rem;
 }
@@ -1354,7 +1361,8 @@ input[type="search"] {
 .entry-footer {
     margin-top: 3rem;
     margin-bottom: 5rem;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     font-size: 16px;
     font-size: 1.6rem;
     line-height: 2em;
@@ -1394,7 +1402,8 @@ blockquote cite {
     margin-left: 40%;
     font-size: 18px;
     font-size: 1.8rem;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     font-style: normal;
     line-height: 1.5em;
     text-align: right;
@@ -1529,8 +1538,8 @@ ol.children { list-style-type: none; }
 }
 
 .comment-author .fn {
-    font-weight: 900;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     font-size: 20px;
     font-size: 2rem;
 }
@@ -1558,8 +1567,8 @@ ol.children { list-style-type: none; }
 .comment-content ol { margin-left: 1.5em; }
 
 .reply {
-    font-weight: 600;
-    font-family: 'PT Sans', sans-serif;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-size: 1.4rem;
 }
@@ -1594,13 +1603,15 @@ ol.children { list-style-type: none; }
 
 .comment-form {
     padding-bottom: 4rem;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     font-size: 16px;
     font-size: 1.6rem;
 }
 
 .comment-form textarea {
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     font-size: 18px;
     font-size: 1.8rem;
 }
@@ -1612,7 +1623,8 @@ ol.children { list-style-type: none; }
 .comment-awaiting-moderation { /* Green background color to make moderation seem less aggressive */
     padding: .5rem 1rem;
     margin: 1rem 0;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     font-size: 16px;
     font-size: 1.6rem;
     color: #fff;
@@ -1642,7 +1654,8 @@ Index and Archive
     padding-top: 2rem;
     margin: 2rem 0;
     font-size:1.5rem;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     font-style: italic;
     border-top: 1px solid hsl(0, 0%, 75%);
     border-bottom: 1px solid hsl(0, 0%, 75%);
@@ -1733,7 +1746,8 @@ object {
     padding: 0.8075em 1em;
     font-size: 14px;
     font-size: 1.4rem;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     background: #e5e5e5;
     background: hsl(0, 0%, 90%);
 }
@@ -1820,7 +1834,8 @@ object {
 .site-footer { 
 	padding: 2em;
 	height:5rem;
-	font-family: 'PT sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
 	font-size: 16px;
 	font-size: 1rem;
 	color: #ddd;
