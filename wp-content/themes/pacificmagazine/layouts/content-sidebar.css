@@ -5,7 +5,7 @@ Layout: Content-Sidebar
 
 .site-content {
     padding-bottom: 4em;
-    background: #fff url(../images/pattern.svg) repeat;
+    background: #eee url(../images/pattern.svg) repeat;
 }
 
 /* Change background for single posts, maybe a subtletexture? */
